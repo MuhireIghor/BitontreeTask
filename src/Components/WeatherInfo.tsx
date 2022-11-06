@@ -4,13 +4,15 @@ const WeatherInfo = ()=>{
     const API = axios.create({baseURL:"http://api.weatherapi.com/v1"});
  useEffect(()=>{
     const location = "kigali";
-    const fetchUrl = `current.json?key=c76ca0b1bf7a41d1bf1202636220511&city name=${location}`;
+    const API_KEY="c76ca0b1bf7a41d1bf1202636220511";
+    let region = "Kigali";
+    const fetchUrl = `/current.json?key=${API_KEY}&q=${region}&aqi=no`;
     const fetchWeather = async()=>{
-        const {data} =  await API.get(fetchUrl);
+        const {data} =  await API.get(fetchUrl); 
         console.log(data);
             }
             fetchWeather();
- },[fetchUrl])
+ })
     useEffect(()=>{
 
     })
