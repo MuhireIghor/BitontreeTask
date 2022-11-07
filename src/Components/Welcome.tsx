@@ -4,7 +4,7 @@ const Welcome = ()=>{
     return(
         <div>
        <div className="bg-white p-[10px] flex rounded-[10px] h-auto ">
-           {dateFormat(now,"dddd mmmm dS yyyy h:MM:ss TT")}
+           { dateFormat(now,"dddd mmmm dS yyyy h:MM:ss TT")}
             </div>
         </div>
     )
