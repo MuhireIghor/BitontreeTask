@@ -28,7 +28,7 @@ const fetchWeather = async()=>{
    setTemperature(JSON.stringify(data.current.temp_c));
    setPressure(JSON.stringify(data.current.pressure_in));
 console.log(data);
-
+    
 return data;
         }
 
