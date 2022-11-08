@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect,useState } from 'react';
 import axios from 'axios';
 const WeatherInfo = ()=>{
+
     const API = axios.create({baseURL:"http://api.weatherapi.com/v1"});
     const[temperature,setTemperature] = useState("");
     const[humidity,setHumidity] = useState("");
@@ -8,27 +9,29 @@ const WeatherInfo = ()=>{
     const[location,setLocation] = useState("");
 
     const handleLocation = (e:ChangeEvent<HTMLInputElement>)=>{
-        setLocation(e.target.value);
+        setLocation(e.target.value)
         console.log(location);
     }
-const handleSubmit = (e:ChangeEvent<HTMLFormElement>)=>{
-    e.preventDefault();
+    const handleSubmit = async(e:ChangeEvent<HTMLFormElement>)=>{
+        e.preventDefault();
+await fetchWeather();
 }
 
- useEffect(()=>{
-    const API_KEY="c76ca0b1bf7a41d1bf1202636220511";
+const API_KEY = import.meta.env.VITE_KEY;
 
-    const fetchUrl = `/current.json?key=${API_KEY}&q=${location}&aqi=no`;
+const fetchUrl = `/current.json?key=${API_KEY}&q=${location}&aqi=no`;
 
-    
-    const fetchWeather = async()=>{
-        const {data} =  await API.get(fetchUrl); 
-       setHumidity(data)
-    return data;
-            }
-        const answer= fetchWeather();
 
- })
+const fetchWeather = async()=>{
+    const {data} =  await API.get(fetchUrl); 
+   setHumidity(JSON.stringify(data.current.humidity));
+   setTemperature(JSON.stringify(data.current.temp_c));
+   setPressure(JSON.stringify(data.current.pressure_in));
+console.log(data);
+
+return data;
+        }
+
 
     return(
         <div className="flex flex-col h-screen">
@@ -43,11 +46,11 @@ const handleSubmit = (e:ChangeEvent<HTMLFormElement>)=>{
     <div className='flex  justify-center items-center text-center bg-[#A2E0FF] w-2/3 h-[212px] rounded-[23px] my-24 grid grid-cols-3 divide-x-  divide-white text-white '>
 <div className='flex flex-col h-full '>
     <div className="main">Temperature</div>
-    <div className='my-12 font-bold text-6xl'>{temperature}</div>
+    <div className='my-12 font-bold text-6xl'>{temperature}<sup>o</sup>C</div>
 </div>
 <div className='border-l-4 border-white h-full'>
     <div className="main">Humidity</div> 
-    <div className='my-12 font-bold text-6xl'>{humidity}</div>
+    <div className='my-12 font-bold text-6xl '>{humidity}</div>
         </div>
 <div className='border-l-4 border-white h-full'>
     <div className="main">Pressure  </div>
