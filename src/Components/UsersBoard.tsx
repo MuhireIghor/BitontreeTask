@@ -39,7 +39,7 @@ const UsersBoard = ()=>{
     {
         users.map((user,index)=>{
             return(
-                <div key={index} className="flex justify-between p-4 bg-[#FBFBFB] shadow-md shadow-[#FBFBFB]">
+                <div key={index} className="flex justify-between p-4 shadow-sm shadow-gray-400 bg-gray-100 shadow-md shadow-[#FBFBFB]">
                     <div className="flex justify-around items-inline space-x-4 ">
 <div className="w-6 h-6 rounded-full bg-[#556080]">
 <img src={user.profileAvatar} />
