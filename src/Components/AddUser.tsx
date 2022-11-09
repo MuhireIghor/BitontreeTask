@@ -1,6 +1,7 @@
 import { ChangeEvent, useState, useEffect } from "react";
+import { useUserContext } from "../contexts/AddUser";
 const AddUser = () => {
-    const userRegex = /^[a-zA-z0-9]{8,75}$/;
+    const userRegex = /^[a-zA-z0-9(?\s)]{8,75}$/;
     const emailRegex = /^[a-zA-Z0-9]{3,}@(gmail|yahoo)\.(fr|com)$/i;
     const phoneRegex = /^[0-9]{10,12}$/;
     const [validName, setValidName] = useState<boolean>(false);
@@ -13,6 +14,8 @@ const AddUser = () => {
     const [formdata, setFormData] = useState({
         userName: '', email: '', phone: '', dob: '', state: ''
     });
+    const {createUser} = useUserContext();
+
     useEffect(() => {
         const result = userRegex.test(formdata.userName);
         setValidName(result);
@@ -33,8 +36,9 @@ const AddUser = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(formdata);
-        localStorage.setItem('user', JSON.stringify(formdata))
-        setFormData({ userName: '', email: '', phone: '', dob: '', state: '' });
+        createUser({name:formdata.userName,age:formdata.dob as unknown as number,state:formdata.state})
+        // localStorage.setItem('user', JSON.stringify(formdata))
+        // setFormData({ userName: '', email: '', phone: '', dob: '', state: '' });
     }
     return (
         <div className="flex flex-col h-screen w-full py-4 ">

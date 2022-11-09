@@ -1,5 +1,9 @@
-import { users } from "../Data/users";
+import { useUserContext } from "../contexts/AddUser";
+// import { users } from "../Data/users";
+
 const UsersBoard = ()=>{
+    const {getAllUser} = useUserContext();
+    const users = getAllUser();
     return(
         <div className="flex flex-col  flex-shrink-3/4">
             <p>Users</p>
@@ -20,10 +24,10 @@ const UsersBoard = ()=>{
         return(
             <div key={index} className="flex bg-[#F1F1F1] p-8 rounded-[4px] items-inline space-x-4">
                 <div className="w-full h-full rounded-full bg-[#556080] p-1 ">
-<img src={user.profileAvatar} />
+<p>{user.name.charAt(0)}</p>
                 </div>
                 <div className="flex flex-col h-full space-y-[2px]">
-                    <p className="text-gray-700">{user.username}</p>
+                    <p className="text-gray-700">{user.name}</p>
                     <p className="text-gray-700">{user.age}</p>
                     <p className="text-gray-700">{user.state}</p>
                 </div>
@@ -42,10 +46,10 @@ const UsersBoard = ()=>{
                 <div key={index} className="flex justify-between p-4 shadow-sm shadow-gray-400 bg-gray-100 shadow-md shadow-[#FBFBFB]">
                     <div className="flex justify-around items-inline space-x-4 ">
 <div className="w-6 h-6 rounded-full bg-[#556080]">
-<img src={user.profileAvatar} />
+<p>{user.name.charAt(0)}</p>
 </div>
 <div className="flex w-6 h-6 space-x-4">
-<p className="text-gray-700 flex ">{user.username} <span className="text-center ml-4">-</span> </p>
+<p className="text-gray-700 flex ">{user.name} <span className="text-center ml-4">-</span> </p>
 <p className="text-gray-700">{user.age}</p>
 <p className="text-gray-700">{user.state}</p>
 </div>

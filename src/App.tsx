@@ -4,15 +4,18 @@ import {BrowserRouter as Router ,Routes,Route,useNavigate} from 'react-router-do
 import { JSXElementConstructor, ReactNode } from 'react';
 import Users from './Pages/Users';
 import Weather from './Pages/Weather';
+import { UserContextProvider } from './contexts/AddUser';
 function App() { 
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path='/' element={()=>navigate('/Add User')  as  ()=>ReactNode } />
+          <UserContextProvider>
+          {/* <Route path='/' element={()=>navigate('/Add User')  as  ()=>ReactNode } /> */}
           <Route path='/Add User' element={<Home />}/>
+          </UserContextProvider>
           <Route path='/Users' element={<Users />}/>
           <Route path='/Weather' element={<Weather />}/>
         </Routes>
